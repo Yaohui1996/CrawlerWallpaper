@@ -5,12 +5,12 @@ from crawler import get_src_url
 from crawler import download_picture
 
 if __name__ == '__main__':
+    kwargs_get_page_nums = {'q': '',                # 图片的关键词。默认为空
+                            'categories': '111',    # 图片分类。3个bit分别对应 General Anime People
+                            'purity': '100',        # 图片纯洁度。3个bit分别对应 SFW Sketchy NSFW
+                            'atleast': '2560x1600', # 图片最小分辨率。 
+                            'ratios': '16x10'}      # 图片宽高比。
     # 获取页面数目
-    kwargs_get_page_nums = {'q': '',
-                            'categories': '111',
-                            'purity': '100',
-                            'atleast': '2560x1600',
-                            'ratios': '16x10'}
     page_nums = get_page_nums(**kwargs_get_page_nums)
     print('检索到【{0}】页图片，每页【24】张。'.format(page_nums))
 
