@@ -30,7 +30,6 @@ def get_page_nums(*,
         sleep(uniform(3, 5))
         r = requests.request(method='get', url=url, headers=virtual_headers(),
                              params=request_params)
-    print(r.url)
     # 提取信息
     from bs4 import BeautifulSoup
     soup = BeautifulSoup(markup=r.text, features='html5lib')
