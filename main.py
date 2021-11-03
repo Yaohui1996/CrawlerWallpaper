@@ -1,41 +1,8 @@
 # -*- coding:UTF-8 -*-
-from crawler import get_page_nums
-from crawler import get_one_page_info_urls
-from crawler import get_src_url
-from crawler import download_picture
+
+from crawler import FavoritesCrawler
 
 if __name__ == '__main__':
-    kwargs_get_page_nums = {'q': '',                # 图片的关键词。默认为空
-                            'categories': '001',    # 图片分类。3个bit分别对应 General Anime People
-                            'purity': '100',        # 图片纯洁度。3个bit分别对应 SFW Sketchy NSFW
-                            'atleast': '2560x1600', # 图片最小分辨率。 
-                            'ratios': '16x10'}      # 图片宽高比。
-    # 获取页面数目
-    page_nums = get_page_nums(**kwargs_get_page_nums)
-    print('检索到【{0}】页图片，每页【24】张。'.format(page_nums))
-
-    # 请输入下载的图片页数
-    download_page_nums = int(input('请输入下载的图片页数：'))
-    min_nums = min(page_nums, download_page_nums)
-    print('即将开始下载【{0}】页，【{1}】张图片...'.format(min_nums, 24 * min_nums))
-
-    # 解析info_urls
-    info_urls = list()
-    for i in range(0, min_nums):
-        kwargs_get_one_page_info_urls = kwargs_get_page_nums.copy()
-        kwargs_get_one_page_info_urls['page'] = str(i + 1)
-        info_urls.extend(get_one_page_info_urls(**kwargs_get_one_page_info_urls))
-        print('已解析{0}张图片的主页地址！'.format(len(info_urls)))
-
-    # 解析src_urls并下载
-    info_urls.reverse()
-    while info_urls:
-        info_url = info_urls.pop()
-        print('正在解析【{0}】...'.format(info_url))
-        src_url = get_src_url(info_url)
-        print('解析完毕！正在下载...')
-        if not (src_url is None):
-            download_picture(src_url)
-        print('还剩【{0}】张图片待下载！'.format(len(info_urls)))
-
-    print('全部图片下载完毕！')
+    crawler_instance = FavoritesCrawler(
+        '001', '100', '1920x1080', '16x9,16x10', '/Users/yaohui/Pictures/wallhaven/')
+    crawler_instance.do_crawler()
