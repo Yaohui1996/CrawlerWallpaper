@@ -1,7 +1,12 @@
 # CrawlerWallpaper
+
 ## 用途及用法
+
 用于爬取[https://wallhaven.cc/](https://wallhaven.cc/)的壁纸
 
+2021/11/03update: 创建实例时修改传入的参数即可更改筛选规则
+
+---
 修改`kwargs_get_page_nums`的`value`即可更改筛选规则
 
 ```python
@@ -13,6 +18,7 @@ kwargs_get_page_nums = {'q': '',                # 图片的关键词。默认为
 ```
 
 ## 环境要求
+
 - python = 3.9.4
 - requests = 2.25.1
 - beautifulsoup4 = 4.9.3
